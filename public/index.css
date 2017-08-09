@@ -1,0 +1,12 @@
+.container {
+    width:50%;
+    height:50%;
+    position:absolute;
+    left:25%;
+    top:25%;
+}
+input[type='text'] {
+    width:100%;
+    border:2px solid black;
+    border-radius:2%;
+}
