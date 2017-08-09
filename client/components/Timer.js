@@ -3,7 +3,6 @@ import  dimension from '../Dimensions'
 export default class TimerComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = {deg:0}
     }
     componentDidMount() {
         const canvas = this.refs.timerCanvas
@@ -39,7 +38,6 @@ export default class TimerComponent extends Component {
         const interval = setInterval(()=>{
             deg += 6
             drawTimer(deg)
-            // this.setState({deg})
             if(deg == 360) {
                 clearInterval(interval)
             }
