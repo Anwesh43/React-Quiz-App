@@ -1,26 +1,40 @@
 import React,{Component} from 'react'
+import AnimationUtil from '../AnimationUtil'
 export default class DetailsFormComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = {btnActive:false}
+        this.state = {btnActive:false,opacity:1}
     }
     componentDidMount() {
+        this.refs.submit.onclick = (event) => {
+            this.handleSubmit(event)
+        }
         this.props.inputs.forEach((input)=>{
-            this.refs[input.toLowerCase()].onkeyup = ()=>{
-                const emptyTextBoxes = this.props.inputs.filter((input)=>(this.refs[input.toLowerCase()].value.trim().length == 0))
-                console.log(emptyTextBoxes.length)
-                if(emptyTextBoxes.length == 0) {
-                    this.setState({btnActive:true})
-                }
-                else if(this.state.btnActive){
-                    this.setState({btnActive:false})
+            var textField = this.refs[input.toLowerCase()]
+            textField.onkeyup = ()=>{
+                if(!textField.getAttribute('readonly')) {
+                    const emptyTextBoxes = this.props.inputs.filter((input)=>(this.refs[input.toLowerCase()].value.trim().length == 0))
+                    console.log(emptyTextBoxes.length)
+                    if(emptyTextBoxes.length == 0) {
+                        this.setState({btnActive:true})
+                    }
+                    else if(this.state.btnActive){
+                        this.setState({btnActive:false})
+                    }
                 }
             }
         })
     }
     handleSubmit(event) {
         event.preventDefault()
-        alert("submitted")
+        this.setState({btnActive:false})
+        this.disableInputs()
+        AnimationUtil.fadeOutComponent(this)
+    }
+    disableInputs() {
+        this.props.inputs.forEach((input)=>{
+            this.refs[input.toLowerCase()].setAttribute('readonly',true)
+        })
     }
     render() {
         const inputs = this.props.inputs || []
@@ -31,11 +45,11 @@ export default class DetailsFormComponent extends Component {
               </td>
           </tr>
         ))
-        var buttonJSX = <button disabled onClick={this.handleSubmit}>Submit</button>
+        var buttonJSX = <button ref="submit" disabled onClick={this.handleSubmit.bind(this)}>Submit</button>
         if(this.state.btnActive) {
-            buttonJSX = <button onClick={this.handleSubmit}>Submit</button>
+            buttonJSX = <button ref="submit">Submit</button>
         }
-        return (<div>
+        return (<div style={{opacity:this.state.opacity}}>
                     <form>
                         <table>
                             <thead>
