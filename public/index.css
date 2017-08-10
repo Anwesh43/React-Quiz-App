@@ -4,9 +4,45 @@
     position:absolute;
     left:25%;
     top:25%;
+
+}
+h2,h4 {
+    font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+    text-align:center;
+}
+form {
+    width:100%;
+    height:100%;
+    background:white;
+    box-shadow: -2px -2px 5px 5px #fafafa;
+}
+table {
+    width:100%;
+    height:100%;
+    padding-left:5px;
+    padding-right:5px;
 }
 input[type='text'] {
     width:100%;
-    border:2px solid black;
-    border-radius:2%;
+    border:2px solid #BDBDBD;
+    border-radius:4px;
+    font-size:20px;
+    font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+}
+tr {
+    padding:1.5%;
+}
+button {
+    width:100%;
+    border:2px solid #00E676;
+    border-radius: 4px;
+    background: #00E676;
+    font-size: 20px;
+    color:white;
+    font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+
+}
+button[disabled] {
+    border:2px solid #f44336;
+    background:#f44336;
 }

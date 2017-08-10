@@ -18,6 +18,10 @@ export default class DetailsFormComponent extends Component {
             }
         })
     }
+    handleSubmit(event) {
+        event.preventDefault()
+        alert("submitted")
+    }
     render() {
         const inputs = this.props.inputs || []
         const inputJSX = inputs.map((input)=>(
@@ -27,14 +31,16 @@ export default class DetailsFormComponent extends Component {
               </td>
           </tr>
         ))
-        var buttonJSX = <button disabled>Submit</button>
+        var buttonJSX = <button disabled onClick={this.handleSubmit}>Submit</button>
         if(this.state.btnActive) {
-            buttonJSX = <button>Submit</button>
+            buttonJSX = <button onClick={this.handleSubmit}>Submit</button>
         }
         return (<div>
-                    <h2>Welcome to trivia quiz</h2>
                     <form>
                         <table>
+                            <thead>
+                                <h2>Welcome to trivia quiz</h2>
+                            </thead>
                             <tbody>
                             {inputJSX}
                             <tr>
