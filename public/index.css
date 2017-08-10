@@ -1,5 +1,5 @@
 .container {
-    width:50%;
+    width:60%;
     height:60%;
     position:absolute;
     left:25%;
@@ -52,11 +52,9 @@ button[disabled] {
 .question-container {
     width:100%;
     height:100%;
-    background:white;
-    box-shadow: -2px -2px 5px 5px #fafafa;
 }
 .timer-container {
-    margin-left:55%;
+    margin-left:15%;
 }
 span {
     padding-left: 3%;
@@ -64,4 +62,10 @@ span {
 }
 input[type="radio"] {
 
+}
+.question-group-container {
+    width:100%;
+    height:100%;
+    background:white;
+    box-shadow: -2px -2px 5px 5px #fafafa;
 }
