@@ -3,8 +3,12 @@ import  dimension from '../Dimensions'
 export default class TimerComponent extends Component {
     constructor(props) {
         super(props)
+        this.state = {w:dimension.w/12,h:dimension.w/12}
     }
     componentDidMount() {
+        window.onresize = (event) => {
+            this.setState({w:window.innerWidth/12,h:window.innerWidth/12})
+        }
         const canvas = this.refs.timerCanvas
         const context = canvas.getContext('2d')
         var w = canvas.width
@@ -38,13 +42,19 @@ export default class TimerComponent extends Component {
         const interval = setInterval(()=>{
             deg += 6
             drawTimer(deg)
+            if(this.props.stop) {
+                clearInterval(interval)
+            }
             if(deg == 360) {
                 clearInterval(interval)
+                if(this.props.oncomplete) {
+                    this.props.oncomplete()
+                }
             }
         },1000)
     }
     render() {
-        return <canvas width={dimension.w/6} height={dimension.h/6} ref="timerCanvas">
+        return <canvas width={this.state.w} height={this.state.h} ref="timerCanvas">
         </canvas>
     }
 }
