@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import ArrayUtil from '../ArrayUtil'
 import QuestionComponent from './QuestionComponent'
 import AnimationUtil from '../AnimationUtil'
+import StringUtil from '../StringUtil'
 export default class QuestionsGroupComponent extends Component  {
     constructor(props) {
         super(props)
@@ -13,7 +14,7 @@ export default class QuestionsGroupComponent extends Component  {
         const stateObj = {curr_question_index:0,correct_answers:0,answers:[],questions:[],opacity:1}
         const questions = this.props.questions.map((questionObj,index)=>{
             var options = questionObj.incorrect_answers
-            const text = questionObj.question
+            const text = StringUtil.unescape(questionObj.question)
             const id = index+1
             ArrayUtil.addAtRandomPosition(options,questionObj.correct_answer)
             stateObj.answers.push(questionObj.correct_answer)
