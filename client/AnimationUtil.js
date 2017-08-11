@@ -6,6 +6,9 @@ export default class AnimationUtil {
               component.setState({opacity})
               if(opacity <= 0) {
                   clearInterval(interval)
+                  if(component.props.ondeactivate) {
+                      component.props.ondeactivate(component.state)
+                  }
               }
           },50)
         }

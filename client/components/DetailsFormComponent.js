@@ -3,7 +3,7 @@ import AnimationUtil from '../AnimationUtil'
 export default class DetailsFormComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = {btnActive:false,opacity:1}
+        this.state = {btnActive:false,opacity:1,user_details:{}}
     }
     componentDidMount() {
         this.refs.submit.onclick = (event) => {
@@ -27,7 +27,8 @@ export default class DetailsFormComponent extends Component {
     }
     handleSubmit(event) {
         event.preventDefault()
-        this.setState({btnActive:false})
+        var user_details = {name:this.refs["name"].value,phone:this.refs["phone"].value,email:this.refs["email"].value}
+        this.setState({btnActive:false,user_details})
         this.disableInputs()
         AnimationUtil.fadeOutComponent(this)
     }

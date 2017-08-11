@@ -6,9 +6,6 @@ export default class TimerComponent extends Component {
         this.state = {w:dimension.w/12,h:dimension.w/12}
     }
     componentDidMount() {
-        window.onresize = (event) => {
-            this.setState({w:window.innerWidth/12,h:window.innerWidth/12})
-        }
         var deg = 0
         const canvas = this.refs.timerCanvas
         const context = canvas.getContext('2d')
@@ -42,6 +39,9 @@ export default class TimerComponent extends Component {
         const interval = setInterval(()=>{
             deg += 6
             drawTimer(deg)
+            if(this.props.stop) {
+                clearInterval(interval)
+            }
             if(deg == 360) {
                 clearInterval(interval)
                 if(this.props.oncomplete) {

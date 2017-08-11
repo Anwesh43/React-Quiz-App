@@ -3,20 +3,20 @@ import Timer from './Timer'
 export default class QuestionComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = {btnState:false,answer:""}
+        this.state = {btnState:false,answer:"",stopTimer:false}
     }
     componentDidMount(){
         this.props.question.options.forEach((option,index)=>{
             this.refs[`radio_${index}`].onclick = (event) => {
                 this.setState({answer:option})
                 if(!this.state.btnState) {
-                    this.setState({btnState:true,resetTimer:false})
+                    this.setState({btnState:true})
                 }
             }
         })
         this.refs["next"].onclick = (event) => {
             event.preventDefault()
-            this.setState({btnActive:false})
+            this.setState({btnActive:false,stopTimer:true})
             if(this.props.onanswer) {
                 this.props.onanswer(this.state.answer)
             }
@@ -57,7 +57,7 @@ export default class QuestionComponent extends Component {
                                       {btnJSX}
                                   </td>
                                   <td>
-                                      <div className="timer-container"><Timer oncomplete={this.handleTimerComplete.bind(this)}/></div>
+                                      <div className="timer-container"><Timer stop={this.state.stopTimer} oncomplete={this.handleTimerComplete.bind(this)}/></div>
                                   </td>
                               </tr>
                         </tbody>
