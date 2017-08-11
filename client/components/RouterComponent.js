@@ -5,7 +5,7 @@ export default class RouterComponent extends Component {
     }
     render() {
         var activeComponentId = this.props.active
-        return (<div class="component-container">
+        return (<div className="component-container">
                     {this.props.children[activeComponentId]}
                 </div>)
     }
