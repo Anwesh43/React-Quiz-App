@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import Timer from './Timer'
 import StringUtil from '../StringUtil'
+import Button from './Button'
 export default class QuestionComponent extends Component {
     constructor(props) {
         super(props)
@@ -15,16 +16,26 @@ export default class QuestionComponent extends Component {
                 }
             }
         })
-        this.refs["next"].onclick = (event) => {
-            event.preventDefault()
-            this.setState({btnActive:false,stopTimer:true})
-            if(this.props.onanswer) {
-                this.props.onanswer(this.state.answer)
-            }
-        }
+        // this.refs["next"].onclick = (event) => {
+        //     event.preventDefault()
+        //     this.setState({btnState:false,stopTimer:true})
+        //     if(this.props.onanswer) {
+        //         this.props.onanswer(this.state.answer)
+        //     }
+        // }
+    }
+    handleNextClick(event) {
+      event.preventDefault()
+      this.setState({btnState:false,stopTimer:true})
+      setTimeout(()=>{
+          if(this.props.onanswer) {
+              this.props.onanswer(this.state.answer)
+          }
+      },10)
+
     }
     handleTimerComplete() {
-        this.setState({answer:"",btnActive:false})
+        this.setState({answer:"",btnState:false,stopTimer:true})
         if(this.props.onanswer) {
             this.props.onanswer(this.state.answer)
         }
@@ -39,13 +50,6 @@ export default class QuestionComponent extends Component {
                   <span>{option}</span>
               </td>
           </tr>))
-        var btnJSX = <button disabled ref="next">Next</button>
-        if(this.state.btnState) {
-            btnJSX = <button ref="next">Next</button>
-        }
-        else {
-            console.log("button is deactivated")
-        }
         return (<div className="question-container">
                     <table>
                         <thead>
@@ -54,9 +58,7 @@ export default class QuestionComponent extends Component {
                         <tbody>
                               {questionOptions}
                               <tr>
-                                  <td>
-                                      {btnJSX}
-                                  </td>
+                                  <Button text="Next" onClick={this.handleNextClick.bind(this)} active={this.state.btnState}/>
                                   <td>
                                       <div className="timer-container"><Timer stop={this.state.stopTimer} oncomplete={this.handleTimerComplete.bind(this)}/></div>
                                   </td>

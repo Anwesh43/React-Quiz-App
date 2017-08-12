@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import AnimationUtil from '../AnimationUtil'
 import TextInput from './TextInput'
+import Button from './Button'
 export default class DetailsFormComponent extends Component {
     constructor(props) {
         super(props)
@@ -39,10 +40,6 @@ export default class DetailsFormComponent extends Component {
         const inputJSX = inputs.map((input)=>(
           <TextInput key={input+"_input"} placeholder={input} keyup={this.handleKeyUp.bind(this)} ref={input.toLowerCase()}/>
         ))
-        var buttonJSX = <button ref="submit" disabled onClick={this.handleSubmit.bind(this)}>Submit</button>
-        if(this.state.btnActive) {
-            buttonJSX = <button ref="submit" onClick={this.handleSubmit.bind(this)}>Submit</button>
-        }
         return (<div style={{opacity:this.state.opacity}}>
                     <form>
                         <table>
@@ -55,7 +52,7 @@ export default class DetailsFormComponent extends Component {
                                 <td><h4>You have 60 minutes to answer all questions</h4></td>
                             </tr>
                             <tr>
-                                <td>{buttonJSX}</td>
+                                <Button text="Submit" onClick={this.handleSubmit.bind(this)} active={this.state.btnActive}></Button>
                             </tr>
                             </tbody>
                         </table>
