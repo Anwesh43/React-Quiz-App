@@ -19,7 +19,7 @@ th {
     font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
 }
 form {
-    width:100%;
+    width:80%;
     height:100%;
     background:white;
     box-shadow: -2px -2px 5px 5px #fafafa;
