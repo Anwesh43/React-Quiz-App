@@ -5,6 +5,7 @@ import ResultComponent from './ResultComponent'
 import RouterComponent from './RouterComponent'
 import JsonFetcher from '../JsonFetcher'
 import LoadingQuestionsComponent from './LoadingQuestionsComponent'
+import config from '../config'
 export default class QuizAppComponent extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +17,12 @@ export default class QuizAppComponent extends Component {
     handleDetailsFormSubmission(componentState) {
         var page_id = this.state.page_id+1
         this.setState({page_id})
-        JsonFetcher.fetchJsonFromURL('https://opentdb.com/api.php?amount=10&type=multiple',(questions)=>{
+        var url = config.API
+        var category = componentState.category
+        if(category.trim() != "") {
+            url = `${url}&category=${category}`
+        }
+        JsonFetcher.fetchJsonFromURL(url,(questions)=>{
             var user_details = componentState.user_details
             const stop_loader = true
             page_id += 1
