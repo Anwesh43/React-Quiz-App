@@ -22,7 +22,7 @@ export default class QuizAppComponent extends Component {
         if(category.trim() != "") {
             url = `${url}&category=${category}`
         }
-        JsonFetcher.fetchJsonFromURL(url,(questions)=>{
+        JsonFetcher.fetchJsonFromURL(url,config.API,(questions)=>{
             var user_details = componentState.user_details
             const stop_loader = true
             page_id += 1
