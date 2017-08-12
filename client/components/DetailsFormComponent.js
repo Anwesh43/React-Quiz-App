@@ -2,10 +2,12 @@ import React,{Component} from 'react'
 import AnimationUtil from '../AnimationUtil'
 import TextInput from './TextInput'
 import Button from './Button'
+import Select from './Select'
+import categories from '../category_data'
 export default class DetailsFormComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = {btnActive:false,opacity:1,user_details:{}}
+        this.state = {btnActive:false,opacity:1,user_details:{},category:""}
     }
     handleKeyUp() {
       const emptyTextBoxes = this.props.inputs.filter((input)=>(this.refs[input.toLowerCase()].refs["input"].value.trim().length == 0))
@@ -30,6 +32,10 @@ export default class DetailsFormComponent extends Component {
         this.disableInputs()
         AnimationUtil.fadeOutComponent(this)
     }
+    handleCategoryChange(event) {
+        var category = event.target.value
+        this.setState({category})
+    }
     disableInputs() {
         this.props.inputs.forEach((input)=>{
             this.refs[input.toLowerCase()].refs["input"].setAttribute('readonly',true)
@@ -48,6 +54,12 @@ export default class DetailsFormComponent extends Component {
                             </thead>
                             <tbody>
                             {inputJSX}
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <Select options={categories} onChange={this.handleCategoryChange.bind(this)} keytext="category"/>
+                            </tr>
                             <tr>
                                 <td><h4>You have 60 minutes to answer all questions</h4></td>
                             </tr>
