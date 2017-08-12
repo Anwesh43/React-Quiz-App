@@ -6,11 +6,16 @@
     top:20%;
 
 }
+
 h2,h4 {
     font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
     text-align:center;
 }
 h3 {
+    font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+}
+th {
+    font-size:20px;
     font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
 }
 form {
@@ -70,8 +75,8 @@ input[type="radio"] {
     box-shadow: -2px -2px 5px 5px #fafafa;
 }
 .result-container {
-    width:80%;
-    height:80%;
+    width:60%;
+    height:60%;
     background:white;
     box-shadow: -2px -2px 5px 5px #fafafa;
 }

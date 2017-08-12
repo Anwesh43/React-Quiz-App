@@ -33,7 +33,7 @@ export default class QuestionComponent extends Component {
     }
     render() {
         const question = this.props.question
-        const questionText = <h3>{question.id}. {question.text}</h3>
+        const questionText = <tr><td><th>{question.id}. {question.text}</th></td></tr>
         const questionOptionsJSX =   this.props.question.options.map((option,index)=>(
             <Radio key={`input_${question.id}_${index}`} value={option} name={`input_${question.id}`} onClick={this.handleRadioClick.bind(this)}/>
         ))

@@ -44,7 +44,7 @@ export default class DetailsFormComponent extends Component {
                     <form>
                         <table>
                             <thead>
-                                <h2>Welcome to trivia quiz</h2>
+                                <tr><td><th>Welcome to trivia quiz</th></td></tr>
                             </thead>
                             <tbody>
                             {inputJSX}
