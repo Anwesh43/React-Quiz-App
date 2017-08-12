@@ -1,28 +1,19 @@
 import React,{Component} from 'react'
 import Timer from './Timer'
-import StringUtil from '../StringUtil'
 import Button from './Button'
+import Radio from './Radio'
 export default class QuestionComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {btnState:false,answer:"",stopTimer:false}
     }
     componentDidMount(){
-        this.props.question.options.forEach((option,index)=>{
-            this.refs[`radio_${index}`].onclick = (event) => {
-                this.setState({answer:option})
-                if(!this.state.btnState) {
-                    this.setState({btnState:true})
-                }
-            }
-        })
-        // this.refs["next"].onclick = (event) => {
-        //     event.preventDefault()
-        //     this.setState({btnState:false,stopTimer:true})
-        //     if(this.props.onanswer) {
-        //         this.props.onanswer(this.state.answer)
-        //     }
-        // }
+    }
+    handleRadioClick(event) {
+        this.setState({answer:event.target.value})
+        if(!this.state.btnState) {
+            this.setState({btnState:true})
+        }
     }
     handleNextClick(event) {
       event.preventDefault()
@@ -43,20 +34,16 @@ export default class QuestionComponent extends Component {
     render() {
         const question = this.props.question
         const questionText = <h3>{question.id}. {question.text}</h3>
-        const questionOptions = this.props.question.options.map((option,index)=>(
-          <tr key={`radio_row_${index}`}>
-              <td>
-                  <input value={option} type="radio"  name={`option_${this.props.question.id}`} ref={`radio_${index}`}/>
-                  <span>{option}</span>
-              </td>
-          </tr>))
+        const questionOptionsJSX =   this.props.question.options.map((option,index)=>(
+            <Radio key={`input_${question.id}_${index}`} value={option} name={`input_${question.id}`} onClick={this.handleRadioClick.bind(this)}/>
+        ))
         return (<div className="question-container">
                     <table>
                         <thead>
                             {questionText}
                         </thead>
                         <tbody>
-                              {questionOptions}
+                              {questionOptionsJSX}
                               <tr>
                                   <Button text="Next" onClick={this.handleNextClick.bind(this)} active={this.state.btnState}/>
                                   <td>
